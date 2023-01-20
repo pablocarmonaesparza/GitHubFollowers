@@ -13,12 +13,52 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-        // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
-        // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
-        // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
-        guard let _ = (scene as? UIWindowScene) else { return }
+        
+        guard let windowSecene = (scene as? UIWindowScene) else { return }
+       
+        window = UIWindow(frame: windowSecene.coordinateSpace.bounds)
+        window?.windowScene = windowSecene
+        window?.rootViewController = createTabBar()
+        window?.makeKeyAndVisible()
+
+        configureNavigationBar()
     }
 
+    // MARK: Tab Bar Creation -
+    
+    func createSearchNavigationController() -> UINavigationController {
+        let searchVC = SearchViewController()
+        searchVC.title = "Search"
+        searchVC.tabBarItem = UITabBarItem(tabBarSystemItem: .search, tag: 0)
+        return UINavigationController(rootViewController: searchVC)
+    }
+    
+    
+    func createFavoritesNavigationController() -> UINavigationController {
+        let favoritesVC = FavoriteListViewController()
+        favoritesVC.title = "Favorites"
+        favoritesVC.tabBarItem = UITabBarItem(tabBarSystemItem: .favorites, tag: 1)
+        return UINavigationController(rootViewController: favoritesVC)
+    }
+    
+    func createTabBar() -> UITabBarController {
+        
+        let tabBar = UITabBarController()
+        
+        UITabBar.appearance().tintColor = .systemGreen
+        tabBar.viewControllers = [createSearchNavigationController(), createFavoritesNavigationController()]
+        
+        return tabBar
+    }
+    
+    // MARK: App Navigation Color -
+    
+    func configureNavigationBar() {
+        UINavigationBar.appearance().tintColor = .systemGreen
+    }
+    
+    // MARK: Defualt Functions - 
+    
     func sceneDidDisconnect(_ scene: UIScene) {
         // Called as the scene is being released by the system.
         // This occurs shortly after the scene enters the background, or when its session is discarded.
