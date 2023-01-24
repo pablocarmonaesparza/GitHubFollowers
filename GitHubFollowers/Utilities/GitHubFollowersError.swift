@@ -1,9 +1,11 @@
 //
-//  ErrorMessage.swift
+//  GitHubFollowersError.swift
 //  GitHubFollowers
 //
-//  Created by Pablo Carmona Esparza on 1/3/23.
+//  Created by Pablo Carmona Esparza on 1/23/23.
 //
+
+import Foundation
 
 import Foundation
 
