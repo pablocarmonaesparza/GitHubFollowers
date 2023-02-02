@@ -50,6 +50,10 @@ class GitHubFollowersButton: UIButton {
         translatesAutoresizingMaskIntoConstraints = false
     }
     
+    func set(backgroundColor: UIColor, title: String) {
+        self.backgroundColor = backgroundColor
+        setTitle(title, for: .normal)
+    }
 }
 
 
